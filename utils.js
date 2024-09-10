@@ -20,29 +20,43 @@ function resizeImage(file, maxWidth) {
   });
 }
 
-function uploadImageToCloudinary(imageFile) {
-  const cloudName = localStorage.getItem('cloudName'); // Replace with your Cloudinary cloud name
-  const uploadPreset = localStorage.getItem('uploadPreset'); // Replace with your Cloudinary upload preset
+async function uploadImageToCloudinary(imageFile) {
+  const cloudName = localStorage.getItem('cloudName');
+  const uploadPreset = localStorage.getItem('uploadPreset');
 
-  return resizeImage(imageFile, 500).then((resizedFile) => {
-    const formData = new FormData();
-    formData.append('file', resizedFile);
-    formData.append('upload_preset', uploadPreset);
+  let imageToUpload;
 
-    return fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
-      method: 'POST',
-      body: formData,
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        if (data.secure_url) {
-          return data.secure_url;
-        } else {
-          throw new Error('Failed to upload image to Cloudinary');
-        }
-      });
-  });
+  if (typeof imageFile === 'string' && imageFile.startsWith('http')) {
+    // 인스타그램 URL인 경우
+    imageToUpload = await fetchInstagramImage(imageFile);
+  } else {
+    // 로컬 파일인 경우
+    imageToUpload = await resizeImage(imageFile, 500);
+  }
+
+  const formData = new FormData();
+  formData.append('file', imageToUpload);
+  formData.append('upload_preset', uploadPreset);
+
+  return fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
+    method: 'POST',
+    body: formData,
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+      if (data.secure_url) {
+        return data.secure_url;
+      } else {
+        throw new Error('Failed to upload image to Cloudinary');
+      }
+    });
+}
+
+async function fetchInstagramImage(url) {
+  const response = await fetch(url);
+  const blob = await response.blob();
+  return new File([blob], 'instagram_image.jpg', { type: 'image/jpeg' });
 }
 
 function showSettings() {

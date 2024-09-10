@@ -1,81 +1,47 @@
-# Virtual Try-On Chrome Extension
+# 가상 옷 입어보기 크롬 확장 프로그램
 
-This Chrome extension enables users to virtually try on clothing items from any e-commerce website using AI-powered image processing.
+이 크롬 확장 프로그램은 AI를 활용하여 온라인 쇼핑몰에서 옷을 가상으로 입어볼 수 있게 해줍니다.
 
-## Demo
+## 주요 기능
 
-Check out this video demonstration of the Virtual Try-On Chrome Extension:
+- 모든 온라인 쇼핑몰에서 사용 가능
+- 한 번 선택한 개인 이미지를 여러 웹사이트에서 재사용 가능
+- 개인 데이터와 이미지는 AI 처리를 위해 Hugging Face 서버로만 전송되어 프라이버시 보호
 
-[![Virtual Try-On Demo](https://img.youtube.com/vi/1LQ2345lANM/0.jpg)](https://youtu.be/1LQ2345lANM)
+## 설치 방법
 
-## Features
+1. 이 저장소를 다운로드하거나 클론합니다.
+2. 크롬 브라우저를 열고 주소창에 `chrome://extensions/`를 입력합니다.
+3. 오른쪽 상단의 "개발자 모드"를 켭니다.
+4. "압축해제된 확장 프로그램을 로드합니다" 버튼을 클릭합니다.
+5. 다운로드한 확장 프로그램 폴더를 선택합니다.
 
-- Works on any e-commerce website
-- Select your image once and easily reuse it across different websites
-- Protects your privacy by not sending personal data or images to any server other than Hugging Face for AI processing
+## 사용 방법
 
-## How It Works
+1. 크롬 브라우저 상단의 확장 프로그램 아이콘을 클릭하여 팝업을 엽니다.
+2. 설정 아이콘(⚙️)을 클릭하고 Replicate API 토큰을 입력합니다.
+3. 개인 이미지를 업로드하거나 선택합니다.
+4. 온라인 쇼핑몰의 제품 페이지로 이동합니다.
+5. "시착하기" 버튼을 클릭하여 가상 착용 결과를 확인합니다.
 
-- Captures the product's primary image from HTML using OpenAI GPT-4
-- Uploads the person's image to Cloudinary for easy AI access
-- Utilizes the Kolors model on Hugging Face via Gradio API
-- Stores person and result images in browser cache for improved usability
+## 주의사항
 
-## Non-Technical Extension
+- Replicate API 토큰이 필요합니다. [Replicate 웹사이트](https://replicate.com/)에서 무료로 가입하여 토큰을 받을 수 있습니다.
+- 이미지 처리에 시간이 걸릴 수 있으니 기다려 주세요.
+- 모든 의류 아이템에 대해 완벽한 결과를 보장하지 않습니다.
 
-I will soon release an official ready-to-use extension for non-technical people. Please fill out https://tally.so/r/mYYjoz to get notified about the release.
+## 문제 해결
 
-## Technical Installation of Extension
+- 확장 프로그램이 작동하지 않는 경우, 크롬 브라우저를 재시작하거나 확장 프로그램을 재설치해 보세요.
+- API 토큰 관련 오류가 발생하면 설정에서 토큰을 다시 확인해 주세요.
 
-1. Clone this repository or download the source code
-2. Open Chrome and navigate to `chrome://extensions/`
-3. Enable "Developer mode" in the top right corner
-4. Click "Load unpacked" and select the directory containing the extension files
-5. Set up the OpenAI and Cloudinary keys
+## 개인정보 보호
 
-## Setup
+- 업로드한 개인 이미지는 로컬 브라우저에만 저장되며, AI 처리를 위해 임시로 Hugging Face 서버로 전송됩니다.
+- 처리가 완료된 후 서버에서 이미지는 즉시 삭제됩니다.
 
-Before using the extension, you need to set up the following:
+## 피드백 및 지원
 
-### OpenAI API Key
+문제가 발생하거나 개선 사항이 있다면 GitHub 이슈를 통해 알려주세요. 여러분의 의견은 이 프로젝트를 더 좋게 만드는 데 큰 도움이 됩니다!
 
-1. Go to [OpenAI](https://platform.openai.com/signup) and sign up for an account
-2. Navigate to the [API keys page](https://platform.openai.com/account/api-keys)
-3. Click "Create new secret key" and copy the generated key
-
-### Cloudinary Cloud Name and Upload Preset
-
-1. Sign up for a [Cloudinary account](https://cloudinary.com/users/register/free)
-2. Log in to your Cloudinary dashboard
-3. Your Cloud Name is displayed in the dashboard's top-left corner
-4. To create an upload preset:
-   - Go to Settings > Upload
-   - Scroll to "Upload presets" and click "Add upload preset"
-   - Choose a preset name and set "Signing Mode" to "Unsigned"
-   - Save the preset
-
-## Usage
-
-1. Click the extension icon in Chrome to open the popup
-2. Click the settings icon (⚙️) and enter your API keys:
-   - OpenAI API Key
-   - Cloudinary Cloud Name
-   - Cloudinary Upload Preset
-3. Save the settings
-4. Upload or select a person image
-5. Navigate to a product page on an e-commerce website
-6. Click "Try On" to see the virtual try-on result
-
-## Credits
-
-- [Kwai-Kolors](https://github.com/Kwai-Kolors) by KuaiShou for the AI model
-- Hugging Face and Gradio for providing the GPU to run the model
-- Cursor Editor for easing the development process
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## License
-
-This project is licensed under the MIT License.
+즐거운 가상 쇼핑 되세요! 🛍️👚👕

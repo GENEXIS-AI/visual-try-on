@@ -1,30 +1,35 @@
 {
   "manifest_version": 3,
-  "name": "Virtual Try On Clothes",
+  "name": "Visual Try-On",
   "version": "1.0",
-  "description": "Try on clothes virtually on any ecommerce store",
-  "permissions": ["activeTab", "scripting", "storage"],
+  "description": "Try on clothes virtually",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "notifications"
+  ],
   "host_permissions": [
-    "https://kwai-kolors-kolors-virtual-try-on.hf.space/*",
-    "https://api.openai.com/*"
+    "<all_urls>"
   ],
   "action": {
-    "default_popup": "popup.html",
-    "default_icon": {
-      "16": "logo.png",
-      "48": "logo.png",
-      "128": "logo.png"
-    }
+    "default_popup": "popup.html"
   },
-  "icons": {
-    "16": "logo.png",
-    "48": "logo.png",
-    "128": "logo.png"
+  "background": {
+    "service_worker": "background.js"
   },
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
       "js": ["content.js"]
     }
-  ]
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["try-on.html"],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'; connect-src * data:;"
+  }
 }
